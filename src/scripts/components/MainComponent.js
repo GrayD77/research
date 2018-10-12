@@ -27,7 +27,14 @@ class MainComponent extends React.Component {
     }
 
     getChildren () {
-        return (new Array(this.state.childrenCount)).map((child, index) => (<div>Ребенок {index}  <Counter min={0} max={10} /></div>));
+        const { childrenCount } = this.state;
+        const children = [];
+
+        for (let i = 0; i < childrenCount; i++) {
+            children.push(<Counter key={i} />)
+        }
+
+        return children;
     }
 
 
@@ -42,7 +49,6 @@ class MainComponent extends React.Component {
         return (
             
             <div>
-
                 Номеров:  <Counter min={0} max={10} />
                 Взрослых: <Counter min={0} max={10} />
                 Детей {this.state.childrenCount}:    <Counter initial={this.state.childrenCount} min={0} max={10} onChange={count => this.updateChildrenCount(count)}/>
@@ -51,23 +57,6 @@ class MainComponent extends React.Component {
                 <hr />
 
                 { this.getChildren() }
-
-                <h3>{firstName}</h3>
-                <h3>{secondName}</h3>
-
-                <input type="text"
-                    placeholder="first name"
-                    value={firstName}
-                    onChange={ e => changeFirstName(e.target.value)}
-                />
-                
-                <br />
-
-                <input type="text"
-                    placeholder="second name"
-                    value={secondName}
-                    onChange={ e => changeSecondName(e.target.value)}
-                />
             </div>
         );   
     };

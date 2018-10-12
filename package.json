@@ -25,6 +25,7 @@
     "webpack-stream": "^5.1.1"
   },
   "dependencies": {
+    "mitt": "^1.1.3",
     "react": "^16.4.2"
   }
 }

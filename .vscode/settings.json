@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Visual Studio Light",
+
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx",
+        "xml": {
+            "attr_quotes": "single"
+        }
+    }
+}

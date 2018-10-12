@@ -12,32 +12,37 @@ class Counter extends React.Component {
             count : initial
         }
     }
+    
+    onChangeCallback (count) {
+        if (typeof this.props.onChange === 'function') this.props.onChange(this.props.name, count);
+    }
 
     increment () {
-        const current = this.state.count,
-            { max = Infinity, step = 1 } = this.props;
-        
+        const { max = Infinity, step = 1 } = this.props;
+        const current = this.state.count;
+        const next = Math.min(current + step, max);
+       
         this.setState({
-            count: Math.min(current + step, max)
+            count: next
         })
 
-        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.count);
+        this.onChangeCallback(next);
     }
 
     decrement () {
-        const current = this.state.count,
-            { min = -Infinity, step = 1 } = this.props;
+        const { min = -Infinity, step = 1 } = this.props;
+        const current = this.state.count;
+        const next = Math.max(current - step, min);
 
         this.setState({
-            count: Math.max(current - step, min)
+            count: next
         })
 
-        if (typeof this.props.onChange === 'function') this.props.onChange(this.state.count);
+        this.onChangeCallback(next);
     }
 
     getLabel(count) {
         if (typeof this.props.getLabel === 'function') return this.props.getLabel(count);
-
         return count;
     }
 
@@ -45,9 +50,9 @@ class Counter extends React.Component {
         const { count } = this.state;
 
         return (
-            <div>
+            <div className="Counter">
                 <button onClick={ () => this.decrement() }>-</button>
-                <span>{ this.getLabel(count) }</span>
+                <span className="Counter-label">{ this.getLabel(count) }</span>
                 <button onClick={ () => this.increment() }>+</button>
             </div>
         );
